@@ -1,0 +1,12 @@
+.cart{
+    background-color: rgb(40, 236, 22);
+    width: 85%;
+    margin-left: 3.5rem;
+
+    border-radius: 10px;
+}
+.header h1{
+    color: yellow;
+    display: flex;
+    justify-content: center;
+}

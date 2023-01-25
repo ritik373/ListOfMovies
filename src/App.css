@@ -1,0 +1,27 @@
+.btn{
+    background-color: rgb(241, 231, 231);
+    width: 50%;
+    height: 4rem;
+ 
+    margin-left: 15rem;
+    border-radius: 15px;
+}
+button{
+    background-color: blue;
+    height: 2rem;
+    width: 8rem;
+    border-radius: 10px;
+    margin-left: 13rem;
+ margin-top: 1rem;
+ color: aliceblue;
+
+}
+.movie{
+    background-color: rgb(241, 231, 231);
+    width: 50%;
+    height: max-content;
+ 
+    margin-left: 15rem;
+    border-radius: 15px;
+
+}
