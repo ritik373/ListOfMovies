@@ -1,0 +1,12 @@
+.formcard{
+    background-color: rgb(241, 231, 231);
+    width: 50%;
+    height: max-content;
+ 
+    margin-left: 15rem;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+.form{
+    margin-left: 2rem;
+}

@@ -12,8 +12,8 @@ button{
     width: 8rem;
     border-radius: 10px;
     margin-left: 13rem;
- margin-top: 1rem;
- color: aliceblue;
+   margin-top: 1rem;
+   color: aliceblue;
 
 }
 .movie{
@@ -23,5 +23,14 @@ button{
  
     margin-left: 15rem;
     border-radius: 15px;
+
+}
+.addbutton{
+    width: 300px;
+    height: 50px;
+    margin-bottom: 20px;
+    align-items: center;
+    margin-left: 20rem;
+
 
 }
