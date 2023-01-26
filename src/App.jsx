@@ -1,30 +1,52 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment ,useEffect,useCallback} from 'react'
 import MovieList from './component/MovieList'
 import './App.css';
 
 function App() {
   const [Movie, setMovie] = useState([])
   const [isLoading,setisLoading]=useState(false);
+  const [error,setError]=useState(null);
 
-     async function FetchDataHandler(){
-      setisLoading(true);
-      const response=await fetch('https://swapi.dev/api/films');
+     const FetchDataHandler= useCallback(async()=>{
 
-      const data=await response.json();
+      setError(null)
+      try{
+       setisLoading(true);
 
-      const transferData=data.results.map((movieData)=>{
-        return {
-          title:movieData.title,
-          director:movieData.director,
-          producer:movieData.producer,
-          opening_crawl:movieData.opening_crawl,
+     const response=await fetch('https://swapi.dev/api/films');
 
-        }
-      })
-      setisLoading(false);
+     if(!response.ok){
+       throw new Error("Something Went wrong");
+       
+     }
 
+     const data=await response.json();
+
+     const transferData=data.results.map((movieData)=>{
+       return {
+         title:movieData.title,
+         director:movieData.director,
+         producer:movieData.producer,
+         opening_crawl:movieData.opening_crawl,
+
+       }
+     })
+
+    
      setMovie(transferData);
-  }
+   }catch(error){
+     setError(error.message);
+   }
+   setisLoading(false);
+
+},[1])
+  
+
+  useEffect(()=>{
+    console.log("effect calling")
+    FetchDataHandler();
+  },[FetchDataHandler])
+      
 
 
   return ( <Fragment>
@@ -35,7 +57,8 @@ function App() {
     </div>
 
     <div className="movie">
-    {!isLoading && Movie.length==0 && <h1>No Found Movie...</h1>}
+    {!isLoading && Movie.length==0 &&  <h1>No Found Movie...</h1>}
+
     {isLoading && <h1>Loading...</h1>}
     {Movie.map((movieData)=>{
      return <div key={Math.random()}>
