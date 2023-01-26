@@ -12,7 +12,7 @@ const Movies = ()=>{
         try{
          setisLoading(true);
   
-       const response=await fetch('https://swapi.dev/api/films');
+       const response=await fetch('https://react-http-movie-7299d-default-rtdb.firebaseio.com/moviesList.json');
   
        if(!response.ok){
          throw new Error("Something Went wrong");
@@ -20,25 +20,38 @@ const Movies = ()=>{
        }
   
        const data=await response.json();
+    //    console.log(data);
+     let loading=[];
+       for (const key in data) {
+
+        loading.push({
+            id:key,
+            title:data[key].title,
+            opening_crawl:data[key].opining,
+            releaseDate:data[key].release,
+        })
+     }
+       console.log(loading)
   
-       const transferData=data.results.map((movieData)=>{
-         return {
-           title:movieData.title,
-           director:movieData.director,
-           producer:movieData.producer,
-           opening_crawl:movieData.opening_crawl,
+    //    const transferData=data.map((movieData,index)=>{
+    //      return {
+    //                 id:index,
+    //                 title:movieData[index].title,
+    //                 opening_crawl:movieData[index].opining,
+    //                 releaseDate:movieData[index].release,
   
-         }
-       })
+    //            }
+    //    })
   
-      
-       setMovie(transferData);
+   
+       setMovie(loading);
+
      }catch(error){
        setError(error.message);
      }
      setisLoading(false);
   
-  },[1])
+  },[setMovie])
     
   
     useEffect(()=>{
@@ -46,7 +59,20 @@ const Movies = ()=>{
       FetchDataHandler();
     },[FetchDataHandler])
         
-  
+  const onDeleteHandler=(id)=>{
+      console.log("delete post",id);
+
+      fetch(`https://react-http-movie-7299d-default-rtdb.firebaseio.com/moviesList.json?${id}`,{ 
+            
+        method: `get`,//(----DELETE------ )request this request working but all api data delete from your moviesList
+        headers: { 'Content-Type': 'application/json' },
+
+    }).then((response)=>{
+    return response.json();
+}).then((data)=>{
+    console.log("Item was delete",data);
+}).catch(err=>console.log("something went wrong"))
+  }
   
     return ( <Fragment>
   
@@ -62,12 +88,13 @@ const Movies = ()=>{
       {Movie.map((movieData)=>{
        return <div key={Math.random()}>
         <MovieList 
+        // id={movieData.id}
         title={movieData.title}
-       director={movieData.director}
-       producer={movieData.producer}
+        release={movieData.release}
        opening_crawl={movieData.opening_crawl}
   
         />
+        <button onClick={()=>onDeleteHandler(movieData.title)}>Delete Post</button>
   
         </div>
   

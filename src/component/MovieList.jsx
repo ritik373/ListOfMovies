@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import './MovieList.css'
 
 const MovieList = (props) => {
+   
 
     return (
         <Fragment>
@@ -11,9 +12,11 @@ const MovieList = (props) => {
 
                 </div>
                 <div className="para">
-                     <p>{props.opening_crawl}</p>
+                <h1>{props.release}</h1>
+                <h1>{props.opening_crawl}</h1>
 
                 </div>
+               
             </div>
 
 
